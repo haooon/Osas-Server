@@ -7,19 +7,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 class MessageController extends BaseController
 {
-    use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
-    public function smsFunc(){
-        
-    }
-    public function emailFunc(Request $request){
-        $input = $request->all();
-        $to = $input['address'];
-        $title = $input['title'];
-        $content = $input['content'];
-        sendEmail($to,$title,$request);
-        return $input;
-    }
-    function sendEmail($to,$title,$content){
+    public function sendEmail($to,$title,$content){
         require_once "Smtp.class.php";
         $smtpserver = "smtp.yeah.com";//SMTP服务器
         $smtpserverport = 25;//SMTP服务器端口
@@ -34,4 +22,18 @@ class MessageController extends BaseController
         $smtp->debug = false;//是否显示发送的调试信息
         $state = $smtp->sendmail($smtpemailto, $smtpusermail, $mailtitle, $mailcontent, $mailtype);
     }
+    use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+    public function smsFunc(){
+        
+    }
+    public function emailFunc(Request $request){
+        $input = $request->all();
+        return $input;
+        $to = $input['address'];
+        $title = $input['title'];
+        $content = $input['content'];
+        sendEmail($to,$title,$request);
+        return $input;
+    }
+    
 }
