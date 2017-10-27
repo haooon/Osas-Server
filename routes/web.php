@@ -14,3 +14,5 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::post('/smsFunc', 'MessageController@smsFunc');
+Route::post('/emailFunc', 'MessageController@emailFunc');
