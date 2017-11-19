@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.7.19-0ubuntu0.16.04.1)
 # Database: test424
-# Generation Time: 2017-11-19 05:03:41 +0000
+# Generation Time: 2017-11-19 10:48:16 +0000
 # ************************************************************
 
 
@@ -28,15 +28,15 @@ DROP TABLE IF EXISTS `article`;
 CREATE TABLE `article` (
   `Aid` int(11) NOT NULL,
   `Disease_id` int(11) NOT NULL,
-  `Atitle` varchar(100) NOT NULL,
+  `Atitle` varchar(100) NOT NULL DEFAULT '',
   `Alabel` varchar(100) DEFAULT NULL,
   `Asource` varchar(200) DEFAULT NULL,
-  `Acontent` varchar(1000) NOT NULL,
+  `Acontent` varchar(1000) NOT NULL DEFAULT '',
   `Apicture_url` varchar(200) DEFAULT NULL,
   `Acontent_url` varchar(200) DEFAULT NULL,
   `Apush_date` datetime NOT NULL,
   PRIMARY KEY (`Aid`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 
@@ -49,11 +49,20 @@ CREATE TABLE `clock` (
   `User_id` int(11) NOT NULL,
   `clock_id` int(11) NOT NULL AUTO_INCREMENT,
   `Reminder_time` time NOT NULL,
-  `dName` varchar(255) NOT NULL,
-  `dDose` varchar(255) NOT NULL,
+  `dName` varchar(255) NOT NULL DEFAULT '',
+  `dDose` varchar(255) NOT NULL DEFAULT '',
   PRIMARY KEY (`clock_id`,`User_id`,`Reminder_time`,`dName`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+LOCK TABLES `clock` WRITE;
+/*!40000 ALTER TABLE `clock` DISABLE KEYS */;
+
+INSERT INTO `clock` (`User_id`, `clock_id`, `Reminder_time`, `dName`, `dDose`)
+VALUES
+	(1,1,'11:22:33','?','111');
+
+/*!40000 ALTER TABLE `clock` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 # Dump of table disease
@@ -65,7 +74,7 @@ CREATE TABLE `disease` (
   `Disease_id` int(11) NOT NULL COMMENT '????ID',
   `Section_id` int(11) NOT NULL COMMENT '????ID',
   `Disease_name` varchar(20) DEFAULT NULL COMMENT '????????',
-  `Disease_Position` varchar(20) NOT NULL COMMENT '???????',
+  `Disease_Position` varchar(20) NOT NULL DEFAULT '' COMMENT '???????',
   `Disease_define` varchar(2000) DEFAULT NULL COMMENT '????????',
   `Disease_cause` varchar(2000) DEFAULT NULL COMMENT '????????',
   `Disease_symptom` varchar(2000) DEFAULT NULL COMMENT '??????',
@@ -78,7 +87,7 @@ CREATE TABLE `disease` (
   `Disease_Video` varchar(20) DEFAULT NULL COMMENT '?????????',
   `Disease_gender` int(11) DEFAULT NULL COMMENT '???????????',
   PRIMARY KEY (`Disease_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 
@@ -104,7 +113,7 @@ CREATE TABLE `health_information` (
   `Hrecording_date` datetime NOT NULL,
   `Hrecording_time` int(11) DEFAULT NULL,
   PRIMARY KEY (`Hid`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 
@@ -116,7 +125,7 @@ DROP TABLE IF EXISTS `medical_history`;
 CREATE TABLE `medical_history` (
   `user_id` int(11) NOT NULL,
   `disease_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 
@@ -152,13 +161,13 @@ DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `User_id` int(11) NOT NULL,
   `User_name` varchar(20) DEFAULT NULL,
-  `User_password` varchar(20) NOT NULL,
+  `User_password` varchar(20) NOT NULL DEFAULT '',
   `User_phone` varchar(20) DEFAULT NULL,
-  `User_sex` varchar(20) NOT NULL,
+  `User_sex` varchar(20) NOT NULL DEFAULT '',
   `User_age` int(11) DEFAULT NULL,
   `User_email` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`User_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
