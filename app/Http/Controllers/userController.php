@@ -63,7 +63,7 @@ class userController extends BaseController
             return json_encode($finished);
         }
         $check = useruser::where('User_email', $User_email)->first();
-        if($check->User_email == $User_email){
+        if($check->User_password == $User_password){
             $finished = array('success'=>'true','User_id'=>$check->User_id);
             return json_encode($finished);
         }else{
