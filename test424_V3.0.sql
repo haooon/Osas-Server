@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.7.19-0ubuntu0.16.04.1)
 # Database: test424
-# Generation Time: 2017-11-26 14:11:42 +0000
+# Generation Time: 2017-11-26 11:21:27 +0000
 # ************************************************************
 
 
@@ -97,7 +97,7 @@ CREATE TABLE `disease` (
 DROP TABLE IF EXISTS `health_information`;
 
 CREATE TABLE `health_information` (
-  `Hid` int(11) NOT NULL AUTO_INCREMENT,
+  `Hid` int(11) NOT NULL,
   `Huser_id` int(11) NOT NULL,
   `Huser_height` decimal(5,2) DEFAULT NULL,
   `Huser_weight` decimal(5,2) DEFAULT NULL,
@@ -115,16 +115,6 @@ CREATE TABLE `health_information` (
   PRIMARY KEY (`Hid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-LOCK TABLES `health_information` WRITE;
-/*!40000 ALTER TABLE `health_information` DISABLE KEYS */;
-
-INSERT INTO `health_information` (`Hid`, `Huser_id`, `Huser_height`, `Huser_weight`, `Hblood_sugar`, `Hblood_fat`, `Heart_rate`, `Hcholesterol_ester`, `Htriglyceride`, `Htotal_cholesterol`, `Hdiastolic_pressure`, `Hsystolic_pressure`, `Hear_temperature`, `Hrecording_date`, `Hrecording_time`)
-VALUES
-	(1,1,111.00,111.00,11.00,1.00,11,11.00,11.00,111.00,11,11,11,'2017-11-26 00:00:00',1),
-	(6,1,2.00,2.00,2.00,3.00,2,3.00,2.00,3.00,3,2,3,'2017-11-26 00:00:00',2);
-
-/*!40000 ALTER TABLE `health_information` ENABLE KEYS */;
-UNLOCK TABLES;
 
 
 # Dump of table medical_history
@@ -134,7 +124,7 @@ DROP TABLE IF EXISTS `medical_history`;
 
 CREATE TABLE `medical_history` (
   `user_id` int(11) NOT NULL,
-  `disease_id` varchar(255) DEFAULT ''
+  `disease_id` varchar(255) NOT NULL DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 LOCK TABLES `medical_history` WRITE;
