@@ -31,14 +31,18 @@ class PEController extends BaseController
             return json_encode($finished);
         }
         
-        $exist = PE::where('User_id', $User_id)->where('Hrecording_date',$Hrecording_date)->first();
+        $exist = PE::where('Huser_id', $Huser_id)->where('Hrecording_time',$Hrecording_time)->first();
         if($exist != null){
-            $finished = array('success'=>'false');
+            // $finished = array('success'=>'false');
+            // return json_encode($finished);
+            $request['Hid'] = $exist->Hid;
+            self::fixPE($request);
+            $finished = array('success'=>'false','Hid'=>$exist->Hid);
             return json_encode($finished);
         }
 
         $new = new PE;
-
+        $Hrecording_date = Carbon::now()->toDateString();
         $new->Huser_height = $Huser_height;
         $new->Huser_weight = $Huser_weight;
         $new->Hblood_sugar = $Hblood_sugar;
@@ -52,11 +56,12 @@ class PEController extends BaseController
         $new->Hrecording_time = $Hrecording_time;
         $new->Htotal_cholesterol = $Htotal_cholesterol;
         $new->Huser_id = $Huser_id;
-        $new->Hrecording_date = Carbon::now()->toDateString();
+        $new->Hrecording_date = $Hrecording_date;
         $new->save();
 
-        $PEid = PE::where('User_id', $User_id)->where('Hrecording_date',$Hrecording_date)->first();
-        $finished = array('success'=>'true','Hid'=>$clockid->$PEid);
+        
+        $PEid = PE::where('Huser_id', $Huser_id)->where('Hrecording_date',$Hrecording_date)->first();
+        $finished = array('success'=>'true','Hid'=>$PEid->Hid);
         return json_encode($finished);
     }
 
@@ -80,21 +85,19 @@ class PEController extends BaseController
             $finished = array('success'=>'false');
             return json_encode($finished);
         }
-        $PE = PE::where('Hid', $Hid);
-        $PE->update(
-            ['name_test'=>'ssshhhrrr'],
-            ['Huser_height'=>$Huser_height],
-            ['Huser_weight'=>$Huser_weight],
-            ['Hblood_sugar'=>$Hblood_sugar],
-            ['Hblood_fat'=>$Hblood_fat],
-            ['Heart_rate'=>$Heart_rate],
-            ['Hcholesterol_ester'=>$Hcholesterol_ester],
-            ['Htriglyceride'=>$Htriglyceride],
-            ['Hdiastolic_pressure'=>$Hdiastolic_pressure],
-            ['Hsystolic_pressure'=>$Hsystolic_pressure],
-            ['Hear_temperature'=>$Hear_temperature],
-            ['Hrecording_time'=>$Hrecording_time],
-            ['Htotal_cholesterol'=>$Htotal_cholesterol]
+        PE::where('Hid', $Hid)->update(
+            ['Huser_height'=>$Huser_height,
+            'Huser_weight'=>$Huser_weight,
+            'Hblood_sugar'=>$Hblood_sugar,
+            'Hblood_fat'=>$Hblood_fat,
+            'Heart_rate'=>$Heart_rate,
+            'Hcholesterol_ester'=>$Hcholesterol_ester,
+            'Htriglyceride'=>$Htriglyceride,
+            'Hdiastolic_pressure'=>$Hdiastolic_pressure,
+            'Hsystolic_pressure'=>$Hsystolic_pressure,
+            'Hear_temperature'=>$Hear_temperature,
+            'Hrecording_time'=>$Hrecording_time,
+            'Htotal_cholesterol'=>$Htotal_cholesterol]
         );
         $finished = array('success'=>'true');
         return json_encode($finished);
