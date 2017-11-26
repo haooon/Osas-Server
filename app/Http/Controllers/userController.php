@@ -95,7 +95,7 @@ class userController extends BaseController
             $User_email = $input['User_email'];
             $User_phone = $input['User_phone'];
             $User_sex = $input['User_sex'];
-            $disease_id = $input['disease_id'];
+            $disease_id = $input['Disease_id'];
         }catch(Exception $e){
             $finished = array('success'=>'false');
             return json_encode($finished);
