@@ -81,7 +81,8 @@ class userController extends BaseController
             return json_encode($finished);
         }
         $User = useruser::where('User_id', $User_id)->first();
-        return $User->toJson();
+        $User['success'] = 'true';
+        return $User;
     }
 
     public function modify(Request $request){
