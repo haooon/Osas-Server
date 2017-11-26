@@ -62,7 +62,7 @@ class userController extends BaseController
             $finished = array('success'=>'false');
             return json_encode($finished);
         }
-        $check = $existEmail = useruser::where('User_email', $User_email)->first();
+        $check = useruser::where('User_email', $User_email)->first();
         if($check->User_email == $User_email){
             $finished = array('success'=>'true','User_id'=>$check->User_id);
             return json_encode($finished);
