@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class useruser extends Model
+class disease extends Model
 {
     //
-    protected $table = 'user';
+    protected $table = 'disease';
     public $timestamps = false;
 }

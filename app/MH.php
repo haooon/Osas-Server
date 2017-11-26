@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class useruser extends Model
+class MH extends Model
 {
     //
-    protected $table = 'user';
+    protected $table = 'medical_history';
     public $timestamps = false;
 }
