@@ -71,4 +71,49 @@ class userController extends BaseController
             return json_encode($finished);
         }
     }
+
+    public function getUserById(Request $request){
+        $input = $request->all();
+        try{
+            $User_id = $input['User_id'];
+        }catch(Exception $e){
+            $finished = array('success'=>'false');
+            return json_encode($finished);
+        }
+        $User = useruser::where('User_id', $User_id)->first();
+        return $User->toJson();
+    }
+
+    public function modify(Request $request){
+        $input = $request->all();
+        try{
+            $User_id = $input['User_id'];
+            $User_password = $input['User_password'];
+            $User_email = $input['User_email'];
+            $User_phone = $input['User_phone'];
+            $User_sex = $input['User_sex'];
+            $disease_id = $input['disease_id'];
+        }catch(Exception $e){
+            $finished = array('success'=>'false');
+            return json_encode($finished);
+        }
+
+        try{
+            $User = useruser::where('User_id', $User_id);
+            $User->update(['User_password'=>$User_password,
+                            'User_email'=>$User_email,
+                            'User_phone'=>$User_phone,
+                            'User_sex'=>$User_sex,
+                            'User_phone'=>$User_phone]);
+
+            $UserMH = MH::where('User_id', $User_id);
+            $UserMH->update(['disease_id'=>$disease_id]);
+                        
+            $finished = array('success'=>'true');
+            return json_encode($finished);
+        }catch(Exception $e){
+            $finished = array('success'=>'false');
+            return json_encode($finished);
+        }
+    }
 }

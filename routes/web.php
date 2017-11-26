@@ -19,6 +19,8 @@ Route::post('/smsFunc', 'MessageController@smsFunc');
 
 Route::post('/register', 'userController@register');
 Route::post('/login', 'userController@login');
+Route::post('/modify', 'userController@modify');
+Route::post('/getUserById', 'userController@getUserById');
 
 Route::post('/setClock', 'clockController@setClock');
 Route::post('/deleteClock', 'clockController@deleteClock');
