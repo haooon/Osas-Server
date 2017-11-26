@@ -87,7 +87,7 @@ class userController extends BaseController
         $User = useruser::where('User_id', $User_id)->first();
         $disease = MH::where('User_id', $User_id)->first();
         $User['success'] = 'true';
-        $User['Disease_id'] = $disease->disease_id;
+        $User['Disease_id'] = $disease->Disease_id;
         return $User;
     }
 

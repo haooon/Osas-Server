@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.7.19-0ubuntu0.16.04.1)
 # Database: test424
-# Generation Time: 2017-11-26 15:35:33 +0000
+# Generation Time: 2017-11-26 14:11:42 +0000
 # ************************************************************
 
 
@@ -142,8 +142,7 @@ LOCK TABLES `medical_history` WRITE;
 
 INSERT INTO `medical_history` (`user_id`, `disease_id`)
 VALUES
-	(1,'1|3|4|6|9'),
-	(3,NULL);
+	(1,'1|3|4|6|9');
 
 /*!40000 ALTER TABLE `medical_history` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -194,9 +193,7 @@ LOCK TABLES `user` WRITE;
 
 INSERT INTO `user` (`User_id`, `User_name`, `User_password`, `User_phone`, `User_sex`, `User_age`, `User_email`)
 VALUES
-	(1,'test','e10adc3949ba59abbe56e057f20f883e','13333333333','1',12,'110@qq.com'),
-	(2,NULL,'e10adc3949ba59abbe56e057f20f883e','15776491459','1',NULL,'1092462726@qq.com'),
-	(3,'uname','e10adc3949ba59abbe56e057f20f883e','13353333333','1',50,'1102@qq.com');
+	(1,'test','e10adc3949ba59abbe56e057f20f883e','13333333333','1',12,'110@qq.com');
 
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
