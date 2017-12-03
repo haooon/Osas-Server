@@ -1,0 +1,17 @@
+
+
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script>
+    dataurl = {
+        "User_id":"1"
+    }
+$.ajax({
+        type: "post",
+        dataType: "html",
+        url: 'http://120.25.67.15/getClocks',
+        data: dataurl,
+        success: function (data) {
+            alert(data)
+        }
+    });
+</script>

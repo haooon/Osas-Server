@@ -204,5 +204,29 @@ class PEController extends BaseController
         return $xxs->toJson();
     }
 
+    public function getOneDayAvgPEsBy(Request $request){
+        $input = $request->all();
+        try{
+            $Huser_id = $input['Huser_id'];
+            $Hrecording_date = $input['Hrecording_date'];
+            $Hrecording_date_nextday = Carbon::createFromFormat('Y-m-d H:i:s',$Hrecording_date)->addHours(24);
+            $x = $input['x'];
+        }catch(Exception $e){
+            $finished = array('success'=>'false');
+            return json_encode($finished);
+        }
+        $xxs = PE::where('Huser_id', $Huser_id)
+                    ->select([$x,'Hrecording_time'])
+                    ->where('Hrecording_date','>=',$Hrecording_date)
+                    ->where('Hrecording_date','<',$Hrecording_date_nextday)
+                    ->get();
+        $num = 0;
+        $sum = 0;
+        foreach($xxs as $xx){
+            
+        }
+        return $xxs->toJson();
+    }
+
 
 }

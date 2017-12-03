@@ -53,12 +53,19 @@ class clockController extends BaseController
         return json_encode($finished);
     }
 
+    function unicode_decode($name){
+         $json = '{"str":"'.$name.'"}';
+         $arr = json_decode($json,true);
+         if(empty($arr)) return '';
+         return $arr['str'];
+       }
+
     public function getClocks(Request $request){
         $input = $request->all();
         $User_id = $input['User_id'];
-        
         $clock = clock::where('User_id',$User_id)->get();
         
-        return $clock->toJson();
+        // return mb_detect_encoding($clock[0]->dName);
+        return utf8_encode($clock);
     }
 }

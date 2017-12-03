@@ -18,7 +18,6 @@ class diseaseController extends BaseController
             return json_encode($finished);
         }
         $diseases = disease::where('Disease_name','like','%'.$Disease_name.'%')->get();
-        $finished = array('success'=>'true','clock_id'=>$clockid->clock_id);
         return $diseases->toJson();
     }
 
