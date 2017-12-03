@@ -66,6 +66,6 @@ class clockController extends BaseController
         $clock = clock::where('User_id',$User_id)->get();
         
         // return mb_detect_encoding($clock[0]->dName);
-        return utf8_encode($clock);
+        return $clock;
     }
 }
