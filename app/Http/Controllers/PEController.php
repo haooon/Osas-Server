@@ -209,23 +209,38 @@ class PEController extends BaseController
         try{
             $Huser_id = $input['Huser_id'];
             $Hrecording_date = $input['Hrecording_date'];
-            $Hrecording_date_nextday = Carbon::createFromFormat('Y-m-d H:i:s',$Hrecording_date)->addHours(24);
+            $n = $input['n'];
             $x = $input['x'];
         }catch(Exception $e){
             $finished = array('success'=>'false');
             return json_encode($finished);
         }
-        $xxs = PE::where('Huser_id', $Huser_id)
-                    ->select([$x,'Hrecording_time'])
-                    ->where('Hrecording_date','>=',$Hrecording_date)
-                    ->where('Hrecording_date','<',$Hrecording_date_nextday)
-                    ->get();
-        $num = 0;
-        $sum = 0;
-        foreach($xxs as $xx){
+        
+        $total_num = 0;
+        $result = array();
+        
+        for($i = 0; $i<$n ; $i++){
+            $start_date = Carbon::createFromFormat('Y-m-d H:i:s',$Hrecording_date)->subDays($i);
+            $end_date = Carbon::createFromFormat('Y-m-d H:i:s',$Hrecording_date)->subDays($i)->addHours(24);
+            $xxs = PE::where('Huser_id', $Huser_id)
+            ->select([$x])
+            ->where('Hrecording_date','>=',$start_date)
+            ->where('Hrecording_date','<',$end_date)
+            ->get();
+            $sum = 0;
+            $num = 0;
+            foreach($xxs as $xx){
+                $sum += $xx->$x;
+                $num += 1;
+            }
+            if($num == 0){
+                array_push($result,0);
+            }else{
+                array_push($result,$sum/$num);
+            }
             
         }
-        return $xxs->toJson();
+        return $result;
     }
 
 

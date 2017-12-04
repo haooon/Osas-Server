@@ -33,6 +33,7 @@ Route::post('/getPEs', 'PEController@getPEs');
 Route::post('/getPEsBy', 'PEController@getPEsBy');
 Route::post('/getAvgPEsBy', 'PEController@getAvgPEsBy');
 Route::post('/getOneDayPEsBy', 'PEController@getOneDayPEsBy');
+Route::post('/getOneDayAvgPEsBy', 'PEController@getOneDayAvgPEsBy');
 
 Route::post('/getDieasesInfoByName', 'diseaseController@getDieasesInfoByName');
 Route::post('/getDieaseInfoById', 'diseaseController@getDieaseInfoById');
@@ -43,3 +44,6 @@ Route::get('/zeng', 'testController@zeng');
 Route::get('/gai', 'testController@gai');
 Route::get('/shan', 'testController@shan');
 Route::post('/emailFunc', 'MessageController@emailFunc');
+
+Route::post('/getArticlesBy', 'articleController@getArticlesBy');
+Route::post('/getArticles', 'articleController@getArticles');
