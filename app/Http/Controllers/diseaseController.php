@@ -42,7 +42,7 @@ class diseaseController extends BaseController
             return json_encode($finished);
         }
         $diseases = disease::where('Disease_symptom','like','%'.$Disease_symptom.'%')->get();
-        return $diseases->toJson();
+        return $diseases;
     }
 
 }
