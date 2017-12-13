@@ -31,12 +31,18 @@ class PEController extends BaseController
             return json_encode($finished);
         }
         
-        $exist = PE::where('Huser_id', $Huser_id)->where('Hrecording_time',$Hrecording_time)->first();
+        $start_date = Carbon::today();
+        $end_date = Carbon::today()->addHours(24);
+
+        $exist = PE::where('Huser_id', $Huser_id)->where('Hrecording_time',$Hrecording_time)
+        ->where('Hrecording_date','>=',$start_date)
+        ->where('Hrecording_date','<',$end_date)
+        ->first();
         if($exist != null){
             // $finished = array('success'=>'false');
             // return json_encode($finished);
             $request['Hid'] = $exist->Hid;
-            self::fixPE($request);
+            // self::fixPE($request);
             $finished = array('success'=>'false','Hid'=>$exist->Hid);
             return json_encode($finished);
         }
@@ -60,7 +66,9 @@ class PEController extends BaseController
         $new->save();
 
         
-        $PEid = PE::where('Huser_id', $Huser_id)->where('Hrecording_date',$Hrecording_date)->first();
+        $PEid = PE::where('Huser_id', $Huser_id)->where('Hrecording_date',$Hrecording_date)
+        ->where('Hrecording_date','>=',$start_date)
+        ->where('Hrecording_date','<',$end_date)->first();
         $finished = array('success'=>'true','Hid'=>$PEid->Hid);
         return json_encode($finished);
     }

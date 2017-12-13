@@ -42,6 +42,27 @@ class clockController extends BaseController
         $input = $request->all();
         try{
             $clock_id = $input['clock_id'];
+            $dName = $input['dName'];
+            $dDose = $input['dDose'];
+            $Reminder_time = $input['Reminder_time'];
+        }catch(Exception $e){
+            $finished = array('success'=>'false');
+            return json_encode($finished);
+        }
+        $flights->update(
+            [
+                'dName'=>$dName,
+                'dDose'=>$dDose,
+                'Reminder_time'=>$Reminder_time
+                ]);
+        $finished = array('success'=>'true');
+        return json_encode($finished);
+    }
+
+    public function resetClock(Request $request){
+        $input = $request->all();
+        try{
+            $clock_id = $input['clock_id'];
             
             $clock = clock::where('clock_id', $clock_id);
             $clock->delete();
