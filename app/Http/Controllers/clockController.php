@@ -38,7 +38,7 @@ class clockController extends BaseController
         return json_encode($finished);
     }
 
-    public function deleteClock(Request $request){
+    public function resetClock(Request $request){
         $input = $request->all();
         try{
             $clock_id = $input['clock_id'];
@@ -49,7 +49,8 @@ class clockController extends BaseController
             $finished = array('success'=>'false');
             return json_encode($finished);
         }
-        $flights->update(
+        $clock = clock::where('clock_id', $clock_id);
+        $clock->update(
             [
                 'dName'=>$dName,
                 'dDose'=>$dDose,
@@ -59,7 +60,7 @@ class clockController extends BaseController
         return json_encode($finished);
     }
 
-    public function resetClock(Request $request){
+    public function deleteClock(Request $request){
         $input = $request->all();
         try{
             $clock_id = $input['clock_id'];

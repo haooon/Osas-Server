@@ -25,6 +25,7 @@ Route::post('/getUserById', 'userController@getUserById');
 Route::post('/setClock', 'clockController@setClock');
 Route::post('/deleteClock', 'clockController@deleteClock');
 Route::post('/getClocks', 'clockController@getClocks');
+Route::post('/resetClock', 'clockController@resetClock');
 
 Route::post('/addPE', 'PEController@addPE');
 Route::post('/fixPE', 'PEController@fixPE');
