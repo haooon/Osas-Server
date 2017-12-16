@@ -66,7 +66,7 @@ class PEController extends BaseController
         $new->save();
 
         
-        $PEid = PE::where('Huser_id', $Huser_id)->where('Hrecording_date',$Hrecording_date)
+        $PEid = PE::where('Huser_id', $Huser_id)->where('Hrecording_time',$Hrecording_time)
         ->where('Hrecording_date','>=',$start_date)
         ->where('Hrecording_date','<',$end_date)->first();
         $finished = array('success'=>'true','Hid'=>$PEid->Hid);
@@ -96,11 +96,11 @@ class PEController extends BaseController
 
         $start_date = Carbon::today();
         $end_date = Carbon::today()->addHours(24);
-        $exist = PE::where('Huser_id', $Huser_id)->where('Hrecording_time',$Hrecording_time)
-        ->where('Hrecording_date','>=',$start_date)
+        $exist = PE::where('Hrecording_date','>=',$start_date)
         ->where('Hrecording_date','<',$end_date)
+        ->where('Hrecording_time',$Hrecording_time)
         ->first();
-        if($exist != null){
+        if($exist != null && $exist->Hid != $Hid){
             // $finished = array('success'=>'false');
             // return json_encode($finished);
             $request['Hid'] = $exist->Hid;
@@ -108,7 +108,6 @@ class PEController extends BaseController
             $finished = array('success'=>'false','Hid'=>$exist->Hid);
             return json_encode($finished);
         }
-
         PE::where('Hid', $Hid)->update(
             ['Huser_height'=>$Huser_height,
             'Huser_weight'=>$Huser_weight,

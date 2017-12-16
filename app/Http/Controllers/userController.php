@@ -27,8 +27,9 @@ class userController extends BaseController
         }
         
         $existPhone = useruser::where('User_phone', $User_phone)->first();
+        $existName = useruser::where('User_name', $User_name)->first();
         $existEmail = useruser::where('User_email', $User_email)->first();
-        if($existPhone != null && $existEmail != null){
+        if(sizeof($existPhone)>3 || sizeof($existEmail)>3 || $existName != NULL){
             $finished = array('success'=>'false');
             return json_encode($finished);
         }
